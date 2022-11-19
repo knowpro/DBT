@@ -1,0 +1,7 @@
+1. Display employee name who is earning maximunm salary.
+2. Find al1 employees who work in the department where martin works.
+3. Find all employees who work in the department where Smith works or Allen works
+4. Display all who earn more than Allen or Smith.
+5. Delete all employees who work in Smith's dept and earn more than 1200 as a sal.
+6. Change the sal of Smith to same a Jones.
+7. Increase the salary bu 10% in the database for all employees having experience more than 40 years
