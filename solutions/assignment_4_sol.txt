@@ -1,0 +1,143 @@
+1
+SELECT
+	sum(sal),
+	avg(sal),
+	(sum(sal) + sum(nvl(comm,0))) "Net Sal"
+FROM emp
+GROUP BY job;
+
+2
+SELECT
+	deptno,
+	count(deptno)
+FROM emp
+WHERE job='ANALYST'
+GROUP BY deptno;
+
+3
+SELECT
+	sum(sal)"Sum of Sal",
+	avg(sal)"Avg sal",
+	deptno
+FROM emp
+WHERE sal>1500
+GROUP BY deptno;
+
+4
+SELECT
+	count(*),
+	deptno
+FROM emp
+WHERE job = 'SALESMAN'
+GROUP BY deptno;
+
+5 // rework
+SELECT
+	count(*)
+FROM emp
+GROUP BY MGR;
+
+6
+SELECT
+	max(sal)"Max Salary",
+	min(sal)"Min Salary",
+	sum(sal)"Sum of Salary"
+FROM emp
+WHERE sal between 1501 and 2999;
+
+7
+SELECT
+	deptno
+FROM emp
+GROUP BY deptno
+HAVING avg(sal)>2000;
+
+8
+SELECT
+	MGR
+FROM emp
+WHERE job='ANALYST' or job='SALESMAN'
+GROUP BY MGR
+HAVING count(MGR) > 2;
+
+9
+CREATE TABLE emp10
+as
+SELECT *
+FROM emp
+WHERE 4=5;
+
+10
+CREATE TABLE dept100
+AS
+SELECT *
+FROM dept;
+
+ALTER TABLE dept100
+ADD constraint pk_dno100 primary key(deptno);
+
+11
+CREATE TABLE emp110
+AS
+SELECT *
+FROM emp
+WHERE deptno = 10;
+
+ALTER TABLE emp110
+ADD CONSTRAINT pk_eno110 primary key(empno)
+ADD CONSTRAINT fk_dno110 foreign key(deptno) references dept100(deptno);
+
+12
+INSERT INTO emp110(EMPNO, ENAME, JOB, HIREDATE, SAL, COMM, DEPTNO)
+VALUES (7969, 'KASCO', 'CEO', '17-DEC-1717', 1700, 17, 20);
+
+INSERT INTO emp110(empno, ename, job, hiredate, sal, comm, deptno)
+VALUES (7969, 'KASCO', 'CEO', '17-dec-1717', 1700, 17, 20);
+
+13
+SELECT *
+FROM emp110
+WHERE MGR is null;
+
+14
+SELECT 
+	ename,
+	deptno,
+	hiredate
+FROM emp110
+WHERE hiredate between '1-JAN-1981' and '31-MAR-1983'
+ORDER BY hiredate;
+
+15
+SELECT
+	ename
+FROM emp
+WHERE REGEXP_LIKE(ename,'^A.*S$') or
+REGEXP_LIKE(ename,'.[N].*[NS]$') or
+REGEXP_LIKE(ename,'..[N].*[NS]$');
+
+16
+SELECT
+	concat('Hello ',ename)
+FROM emp110;
+
+17
+CREATE TABLE 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+

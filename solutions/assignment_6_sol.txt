@@ -1,0 +1,195 @@
+1. list all courses for which no room is assigned and all rooms
+ which are available.
+
+SELECT
+	RID, RNAME, RLOC
+
+WHERE NOT IN (SELECT rid
+		  FROM courses);
+
+SELECT
+	RID, RNAME, RLOC
+FROM room
+WHERE NOT in (SELECT rid
+		  FROM courses);
+		  
+SELECT
+	c.cid, c.cname,
+	r.rid, r.rname, r.rloc
+FROM courses c
+FULL OUTER JOIN room r
+on c.rid = r.rid
+WHERE c.rid is null;
+
+---------------------------------------------------
+
+2. list all faculties who are not allocated to any 
+course and rooms which are not allocated to 
+any course.
+
+SELECT
+	f.fid, f.fname,
+	
+FROM faculty f
+RIGHT JOIN 
+
+---------------------------------------------------
+
+3. list all rooms which are allocated or not
+allocated to any courses
+
+SELECT
+	r.rid, r.rname,
+	c.cid, c.cname
+FROM room r
+LEFT JOIN courses c
+on r.rid = c.rid;
+
+---------------------------------------------------
+
+4. list all rooms which are not allocated to any
+courses
+
+SELECT
+	r.rid, r.rname
+FROM room r
+LEFT JOIN courses c
+on r.rid = c.rid
+WHERE c.cid IS NULL;
+
+---------------------------------------------------
+
+5. display courses and faculty assigned to those 
+courses whose special skill is database
+
+SELECT
+	c.cid, c.cname,
+	f.fid, f.sp_skill1, f.sp_skill2
+FROM courses c
+INNER JOIN faculty f
+ON c.fid = f.fid
+// we don't recquire below lines bcoz innerJ
+/*WHERE f.sp_skill1 = 'database' or
+	  f.sp_skill2 = 'database';
+*/
+
+---------------------------------------------------
+	
+6. display time table --- it should contain course
+details , faculty and room details
+###################################################
+
+1. List all products with category chips
+
+SELECT
+	p.pid, p.pname, p.price, p.qty
+FROM product p
+LEFT JOIN category c
+ON p.cid = c.cid
+WHERE c.cname = 'chips';
+
+---------------------------------------------------
+
+2. display all products sold by kirti
+	
+SELECT
+	p.pid, p.pname, p.price, p.qty
+FROM product p
+LEFT JOIN salesman s
+ON p.sid = s.sid
+WHERE s.sname = 'Kirti';
+
+SELECT
+	p.pid, p.pname, p.price, p.qty
+FROM salesman s
+RIGHT JOIN product p
+ON p.sid = s.sid
+WHERE s.sname = 'Kirti';
+
+SELECT
+	s.sid, s.sname, s.city
+FROM salesman s
+RIGHT JOIN product p
+ON p.sid = s.sid
+WHERE s.sname = 'Prasad';
+
+SELECT
+	s.sid, s.sname, s.city
+FROM salesman s
+LEFT JOIN product p
+ON p.sid = s.sid
+WHERE s.sname = 'Prasad';
+
+SELECT
+	s.sid, s.sname, s.city,
+	p.pname
+FROM salesman s
+RIGHT JOIN product p
+ON p.sid = s.sid
+WHERE s.sname = 'Kirti';
+
+---------------------------------------------------
+
+3. display all salesman who did not sell any product
+
+SELECT
+	s.sid, s.sname
+FROM salesman s
+LEFT JOIN product p
+on s.sid = p.sid
+WHERE s.sid NOT IN (SELECT
+						sid
+					FROM
+						product);
+
+---------------------------------------------------
+
+4. display all category for which no product is there
+
+SELECT
+	c.cname, c.description, c.cid
+FROM category c
+LEFT JOIN product p
+ON c.cid = p.cid
+WHERE c.cid NOT IN(SELECT cid
+						FROM product);
+---------------------------------------------------
+						
+5. display all products with no category assigned
+
+SELECT
+	p.pid, p.pname
+FROM product p
+LEFT JOIN category c
+ON p.cid = c.cid
+WHERE c.cid NOT IN p.cid;
+
+SELECT
+	p.pid, p.pname
+FROM product p
+LEFT JOIN category c
+ON p.cid = c.cid
+WHERE c.cid NOT IN (SELECT
+						cid
+					FROM
+						product);
+						
+---------------------------------------------------
+
+6. list all salesman who stays in city with name 
+starting with P or N
+
+SELECT *
+FROM salesman
+WHERE REGEXP_LIKE(sname,'^[PN]');
+
+---------------------------------------------------
+
+7. add new column in salesman table by name credit
+limit.
+
+ALTER TABLE
+	salesman
+ADD credit_limit number(8);
+
+---------------------------------------------------
