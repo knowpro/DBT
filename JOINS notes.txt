@@ -1,0 +1,28 @@
+SELECT
+	e.empno, e.ename, e.deptno, d.deptno, d.dname
+FROm emp e
+cross join dept d;
+
+SELECT
+	e.empno, e.ename, e.deptno, d.deptno, d.dname
+FROM dept d
+CROSS JOIN emp e;
+-------------------------------------------------------------------
+SELECT DISTINCT job
+FROM emp;
+-------------------------------------------------------------------
+
+SELECT
+	e.empno, e.ename, e.deptno,
+	d.dname
+FROM emp e
+INNER JOIN dept d
+on e.deptno =  d.deptno;
+-------------------------------------------------------------------
+
+SELECT
+	e.empno, e.ename, e.sal,
+	s.grade
+FROM emp e
+INNER JOIN salgrade s
+on e.sal between s.hisal and s.losal;

@@ -1,0 +1,26 @@
+SELECT
+	MAX(sal)
+FROM emp
+WHERE sal  NOT IN (SELECT
+						MAX(sal)
+					FROM emp);
+					
+/**********************************************************/
+				
+SELECT
+	MAX(distinct sal)
+FROM emp
+WHERE sal NOT IN ( SELECT
+				        MAX(sal)
+					FROM emp e2
+					WHERE e2.sal > e1.sal );
+					
+/**********************************************************/
+
+SELECT
+	MAX(distinct sal)
+FROM emp e1
+WHERE 3 NOT IN ( SELECT
+				        MAX(DISTINCT sal)
+					FROM emp e2
+					WHERE e2.sal > e1.sal );

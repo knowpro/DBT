@@ -1,0 +1,58 @@
+Q. Display all employees of Research department.
+
+SELECT *
+FROM emp
+WHERE deptno = (SELECT
+			deptno
+		FROM dept
+		WHERE dname= 'RESEARCH');
+
+/*******************************************************/
+
+Q. Display employees having salary more than Allen and
+   Smith.
+
+SELECT *
+FROM emp
+WHERE sal > all (SELECT sal
+		FROM emp
+		WHERE ename in ('SMITH','ALLEN'));
+
+/*******************************************************/
+
+Q. Display employees having salary more than Allen or
+   Smith.
+
+SELECT *
+FROM emp
+WHERE sal > any (SELECT sal
+		FROM emp
+		WHERE ename in ('SMITH','ALLEN'));
+
+/*******************************************************/
+
+Q. Display employees having salary in between Allen and
+   Smith.
+
+SELECT *
+FROM emp
+WHERE sal between (SELECT sal
+		   FROM emp
+		   WHERE ename in ('SMITH'))
+		   AND (SELECT sal
+		   	FROM emp
+		   	WHERE ename in ('ALLEN'));
+
+/*******************************************************/
+
+
+SELECT
+	ename "Name",
+	sal   "Max Salary"
+FROM emp
+WHERE sal = (SELECT max(sal)
+	     FROM emp);
+
+/*******************************************************/
+
+UPDATE 
