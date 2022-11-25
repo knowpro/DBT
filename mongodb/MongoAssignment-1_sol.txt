@@ -1,0 +1,59 @@
+1. to find all movies with rating =3
+
+db.movie.find({rating:3}).pretty()
+
+--------------------------------------------------------------
+
+2. to find all mivies with rating =3 and price=340
+
+db.movie.find({rating:3, price:340}).pretty()
+
+--------------------------------------------------------------
+
+3. to find all movies with rating >3 and sort them ratingwise
+
+db.movie.find({rating:{$gt:3}}).sort({rating:1}).pretty()
+
+--------------------------------------------------------------
+
+4. to find all movies with rating >3 and rating < 6
+
+db.movie.find({rating:{$gt:3, $lt:6}}).pretty()
+
+--------------------------------------------------------------
+
+7. to find all movies with price = either 200 or 340 or 240
+
+db.movie.find({price:{$in:[200,340,240]}}).pretty()
+
+--------------------------------------------------------------
+
+8.to find all movies with price is not  either 200 or 340 or 240
+
+db.movie.find({price: {$nin:[200, 340, 240]}}).pretty()
+
+--------------------------------------------------------------
+
+9. to find all movies with odd rating
+
+db.movie.find({rating:{$mod:[2,1]}},{name:1, _id:0}).pretty()
+
+--------------------------------------------------------------
+
+11.to find all movies in which 3 actors are there in the list
+
+db.movie.find({actor:{$gt:3}).pretty()
+
+--------------------------------------------------------------
+
+12. find all movies in which Amitabh has acted
+
+db.movie.find({actor:'Amitabh'},{name:1}).pretty()
+
+--------------------------------------------------------------
+
+importing restaurents
+
+mongoimport --db samp --collection restos --file "C:\Hogwarts\dbt\mongodb\restaurent.json"
+
+13. 

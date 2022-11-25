@@ -1,0 +1,22 @@
+MongoDB Practise
+
+use samp;
+
+db.dropDatabase();
+
+db.entc.insert({empno:1,
+			ename:'Geeta',
+			hiredate:ISODate("2020-11-20")});
+			
+db.entc.insert({empno:2,
+			ename:'Seeta',
+			hiredate:ISODate("2022-10-03"),
+			hobby:['Swimming','Reading']});
+
+db.entc.find().pretty();
+
+mongoimport --db samp --collection movie --file "C:/Hogwarts/DBT/mongodb/movie.json"
+
+db.movie.find({price:{$in[250,300,350]},
+				{name:1, _id:0});
+
