@@ -1,0 +1,43 @@
+mongoimport --db samp --collection resto --file "C:\Hogwarts\DBT\mongodb\restaurent.json"
+
+mongoimport --db dbName --collection collectionName --file fileName.json
+
+-------------------------------------------------------------------------------------------------------------------------
+
+db.movie.aggregate([
+	{ $match: { rating: { $gt:3 } }
+	},
+	
+	{ $group: { _id: "$rating", sum_price: { $sum: "$price" },
+				avg_price: { $avg: "$price" }, min_price: { $min: "$price" },
+				max_price: { $max: "$price" }, count: { $sum:1 }
+			  }
+	}
+
+])
+
+-------------------------------------------------------------------------------------------------------------------------
+
+db.movie.aggregate([
+	{ $group: { _id:"$rating", sum_of_prices: { $sum: "$price" } }
+	},
+	
+	{ $sort: { sum_of_prices: -1 }
+	},
+	
+	{ $skip: 1
+	},
+	
+	{ $limit: 1
+	}
+])
+
+-------------------------------------------------------------------------------------------------------------------------
+
+db.movie.aggregate([
+	{ $group: {_id: null, total_amount: { $sum: "$price" }, average_price: { $avg: "$price" } }
+	}
+])
+
+-------------------------------------------------------------------------------------------------------------------------
+
